@@ -1,0 +1,21 @@
+
+ import "./user.zmodel"  
+ import "./item.zmodel"  
+
+model Transaction {
+
+    id                String        @id @default(uuid())  
+    amount        Float            
+    paymentMethod  String          
+    dateCompleted  String          
+    buyerId      String          
+    buyer          User?            @relation(fields: [buyerId], references: [id], name:"buyer")  
+    sellerId    String          
+    seller        User?            @relation(fields: [sellerId], references: [id], name:"seller")  
+    itemId        String          
+    item            Item?            @relation(fields: [itemId], references: [id], name:"item")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

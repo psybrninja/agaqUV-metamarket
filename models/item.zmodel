@@ -1,0 +1,24 @@
+
+ import "./user.zmodel"  
+ import "./image.zmodel"  
+ import "./transaction.zmodel"  
+
+model Item {
+
+    id                String        @id @default(uuid())  
+    title          String          
+    description  String?          
+    category    String          
+    type            String          
+    price          Float?            
+    barterItem  String?          
+    datePosted  String          
+    userId        String          
+    user            User?            @relation(fields: [userId], references: [id], name:"user")  
+
+images        Image[]      @relation("item")  
+    transactions  Transaction[]  @relation("item")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}
